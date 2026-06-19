@@ -28,7 +28,7 @@ export default function ETAForm({
   ];
 
   return (
-    <div className="bg-slate-900 p-6 rounded-xl space-y-5">
+    <div className="bg-surface p-6 rounded-xl space-y-5">
       {/* Vessel Presets */}
       <div>
         <p className="text-sm text-slate-400 mb-2">
@@ -88,7 +88,7 @@ export default function ETAForm({
       {/* Button */}
       <button
         onClick={onCalculate}
-        className="w-full bg-teal-600 hover:bg-teal-700 transition p-3 rounded-lg font-semibold"
+        className="w-full bg-accent transition p-3 rounded-lg font-semibold"
       >
         Calculate ETA
       </button>

@@ -6,17 +6,12 @@ interface ResultCardProps {
   result: ETAResult;
 }
 
-export default function ResultCard({
-  result,
-}: ResultCardProps) {
+export default function ResultCard({ result }: ResultCardProps) {
   return (
-    <div className="bg-slate-900 p-6 rounded-xl space-y-3">
-
+    <div className="bg-card border border-border backdrop-blur p-6 rounded-xl">
       <div className="flex items-center gap-2">
-        <Ship className="text-teal-400" />
-        <h2 className="text-lg font-semibold">
-          ETA Result
-        </h2>
+        <Ship className="text-accent" />
+        <h2 className="text-lg font-semibold font-sans">ETA Result</h2>
       </div>
 
       <p>
@@ -28,7 +23,7 @@ export default function ResultCard({
 
       <p>
         ETA:{" "}
-        <span className="font-bold text-teal-400">
+        <span className="font-bold text-success font-mono">
           {format(result.eta, "PPP p")}
         </span>
       </p>

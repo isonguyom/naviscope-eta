@@ -13,7 +13,7 @@ export default function VoyageSummary({ distance, speed, duration }: Props) {
     <div className="bg-slate-900 p-6 rounded-xl space-y-4">
       {/* Icon + Title */}
       <div className="flex items-center gap-2">
-        <Ship className="text-teal-400" />
+        <Ship className="text-accent" />
         <h2 className="text-lg font-semibold">Voyage Summary</h2>
       </div>
 
@@ -33,7 +33,7 @@ export default function VoyageSummary({ distance, speed, duration }: Props) {
 
         <p>
           Estimated Fuel Usage:{" "}
-          <span className="font-bold text-orange-400">
+          <span className="font-bold text-warning">
             {fuelEstimate.toFixed(2)} tons
           </span>
         </p>
