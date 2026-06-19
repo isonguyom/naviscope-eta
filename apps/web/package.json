@@ -12,16 +12,12 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "htmlhint": "^1.9.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "prettier": "^3.8.4"
   },
   "lint-staged": {
-    "*.html": [
-      "htmlhint",
-      "prettier --write"
-    ],
+    "*.html": "prettier --write",
     "*.{css,json,md}": "prettier --write"
   }
 }
