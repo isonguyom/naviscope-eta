@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 interface ETAFormProps {
   distance: string;
@@ -22,9 +22,9 @@ export default function ETAForm({
   onCalculate,
 }: ETAFormProps) {
   const presets = [
-    { label: "🚢 Cargo Vessel", value: 12 },
-    { label: "🛢 Tanker", value: 15 },
-    { label: "📦 Container Ship", value: 20 },
+    { label: '🚢 Cargo Vessel', value: 12 },
+    { label: '🛢 Tanker', value: 15 },
+    { label: '📦 Container Ship', value: 20 },
   ];
 
   return (

@@ -1,4 +1,4 @@
-import { Ship } from "lucide-react";
+import { Ship } from 'lucide-react';
 
 interface Props {
   distance: number;
@@ -32,7 +32,7 @@ export default function VoyageSummary({ distance, speed, duration }: Props) {
         </p>
 
         <p>
-          Estimated Fuel Usage:{" "}
+          Estimated Fuel Usage:{' '}
           <span className="font-bold text-warning">
             {fuelEstimate.toFixed(2)} tons
           </span>

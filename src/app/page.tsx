@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import ETAForm from "@/components/ETAForm";
-import ResultCard from "@/components/ResultCard";
+import ETAForm from '@/components/ETAForm';
+import ResultCard from '@/components/ResultCard';
 
-import { calculateETA } from "@/lib/calculateETA";
-import { ETAResult } from "@/types/eta";
-import VoyageSummary from "@/components/VoyageSummary";
+import { calculateETA } from '@/lib/calculateETA';
+import { ETAResult } from '@/types/eta';
+import VoyageSummary from '@/components/VoyageSummary';
 
 export default function Home() {
-  const [distance, setDistance] = useState("");
-  const [speed, setSpeed] = useState("");
-  const [departure, setDeparture] = useState("");
+  const [distance, setDistance] = useState('');
+  const [speed, setSpeed] = useState('');
+  const [departure, setDeparture] = useState('');
 
   const [result, setResult] = useState<ETAResult | null>(null);
 
@@ -22,7 +22,7 @@ export default function Home() {
     const etaResult = calculateETA(
       Number(distance),
       Number(speed),
-      new Date(departure),
+      new Date(departure)
     );
 
     setResult(etaResult);
@@ -35,7 +35,7 @@ export default function Home() {
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-bold">Naviscope ETA</h1>
           <p className="text-slate-400">
-           Precision ETA for maritime operations
+            Precision ETA for maritime operations
           </p>
         </div>
 

@@ -1,6 +1,6 @@
-import { format } from "date-fns";
-import { ETAResult } from "@/types/eta";
-import { Ship } from "lucide-react";
+import { format } from 'date-fns';
+import { ETAResult } from '@/types/eta';
+import { Ship } from 'lucide-react';
 
 interface ResultCardProps {
   result: ETAResult;
@@ -15,16 +15,16 @@ export default function ResultCard({ result }: ResultCardProps) {
       </div>
 
       <p>
-        Duration:{" "}
+        Duration:{' '}
         <span className="font-bold">
           {result.durationHours.toFixed(2)} hours
         </span>
       </p>
 
       <p>
-        ETA:{" "}
+        ETA:{' '}
         <span className="font-bold text-success font-mono">
-          {format(result.eta, "PPP p")}
+          {format(result.eta, 'PPP p')}
         </span>
       </p>
     </div>
