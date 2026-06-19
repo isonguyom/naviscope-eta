@@ -10,6 +10,10 @@ jobs:
   dashboard:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: apps/dashboard
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -17,18 +21,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: npm
+          node-version: 22
 
-      # IMPORTANT: install inside dashboard folder
       - name: Install dependencies
-        run: npm install
-        working-directory: apps/dashboard
+        run: npm ci
 
       - name: Run ESLint
         run: npm run lint
-        working-directory: apps/dashboard
 
       - name: Build Next.js app
         run: npm run build
-        working-directory: apps/dashboard
