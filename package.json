@@ -1,4 +1,8 @@
 {
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "prepare": "husky",
     "lint": "lint-staged"
