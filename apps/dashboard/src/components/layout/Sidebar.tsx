@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export default function Sidebar({
   open,
@@ -39,12 +40,20 @@ export default function Sidebar({
         )}
       >
         {/* HEADER */}
-        <div className="px-5 py-6 border-b border-border shrink-0 h-16 flex items-center">
-          <div className="text-lg font-bold text-accent">Naviscope ETA</div>
+        <div className="px-4 py-6 border-b border-border shrink-0 h-16 flex items-center gap-1">
+          <Image
+            src="/assets/naviscope-icon.svg"
+            alt="Naviscope icon"
+            width={40}
+            height={40}
+          />{' '}
+          <h1 className="text-xl font-medium text-foreground">
+            Naviscope <span className="font-semibold">ETA</span>
+          </h1>
         </div>
 
         {/* NAV (SCROLLABLE AREA) */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-2">
+        <nav className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
           {navItems.map((item) => (
             <Link
               key={item.path}
