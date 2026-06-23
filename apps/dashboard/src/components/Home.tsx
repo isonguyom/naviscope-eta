@@ -6,6 +6,7 @@ import ETAForm from '@/components/ETAForm';
 import ResultCard from '@/components/ResultCard';
 
 import { calculateETA } from '@/lib/calculateETA';
+import { ETAResult } from '@/types/eta';
 import VoyageSummary from '@/components/VoyageSummary';
 
 export default function HomePage() {
