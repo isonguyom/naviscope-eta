@@ -10,8 +10,7 @@ import SubmitButton from '@/components/ui/form/SubmitButton';
 
 import { etaFormSchema, EtaFormSchemaType } from '@/lib/validations/eta';
 import type { EtaInputType } from '@/types/eta';
-import { useState } from 'react';
-import type { ButtonState } from '@/components/ui/Button';
+import useButtonState from '@/hooks/useButtonState';
 
 type EtaFormProps = {
   onCalculate: (data: EtaInputType) => void;
@@ -36,16 +35,19 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
     },
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting, isSubmitSuccessful, submitCount },
-  } = methods;
+  const { handleSubmit } = methods;
 
-  const [submitState, setSubmitState] = useState<ButtonState>('idle');
+  const {
+    state: submitState,
+    setLoading,
+    setSuccess,
+    setError,
+  } = useButtonState();
+  const isLoading = submitState === 'loading';
 
   const onSubmit = async (data: EtaFormSchemaType) => {
     try {
-      setSubmitState('loading');
+      setLoading();
 
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -62,17 +64,10 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
         departureDate: new Date(data.departure),
       });
 
-      setSubmitState('success');
-
-      setTimeout(() => {
-        setSubmitState('idle');
-      }, 3000);
+      // reset();
+      setSuccess();
     } catch {
-      setSubmitState('error');
-
-      setTimeout(() => {
-        setSubmitState('idle');
-      }, 3000);
+      setError();
     }
   };
 
@@ -81,7 +76,7 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="rounded-xl border border-border p-5 space-y-4"
+        className="rounded-xl border border-border p-5 space-y-4 max-h-fit"
       >
         <Select
           name="vessel"
@@ -89,6 +84,7 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
           placeholder="Select vessel type"
           options={vessels}
           required
+          disabled={isLoading}
         />
 
         <Input
@@ -99,6 +95,7 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
           numeric
           placeholder="Enter distance in NM"
           required
+          disabled={isLoading}
         />
 
         <Input
@@ -109,6 +106,7 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
           numeric
           placeholder="Enter speed in knots"
           required
+          disabled={isLoading}
         />
 
         <Input
@@ -116,6 +114,7 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
           label="Departure Date & Time"
           type="datetime-local"
           required
+          disabled={isLoading}
         />
 
         <SubmitButton
@@ -126,10 +125,6 @@ export default function EtaForm({ onCalculate }: EtaFormProps) {
         >
           Calculate ETA
         </SubmitButton>
-
-        {submitCount > 0 && !isSubmitting && isSubmitSuccessful && (
-          <p className="text-sm text-success">ETA calculated successfully.</p>
-        )}
       </form>
     </FormProvider>
   );
