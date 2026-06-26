@@ -1,11 +1,11 @@
-import { z } from 'zod';
 import { numericString } from '@/lib/validations/helpers';
+import z from 'zod';
 
-export const etaFormSchema = z.object({
+export const fuelEstimatorSchema = z.object({
   vessel: z.string().min(1, 'Please select a vessel'),
   distance: numericString('Distance'),
   speed: numericString('Speed'),
-  departure: z.string().min(1, 'Departure date is required'),
+  fuelPrice: numericString('Fuel price'),
 });
 
-export type EtaFormSchemaType = z.infer<typeof etaFormSchema>;
+export type FuelEstimatorSchemaType = z.infer<typeof fuelEstimatorSchema>;

@@ -1,19 +1,4 @@
-import { EtaInputType, ETAResult, EtaResultType } from '@/types/eta';
-
-export function calculateETA(
-  distance: number,
-  speed: number,
-  departure: Date
-): ETAResult {
-  const durationHours = distance / speed;
-
-  const eta = new Date(departure.getTime() + durationHours * 60 * 60 * 1000);
-
-  return {
-    durationHours,
-    eta,
-  };
-}
+import { EtaInputType, EtaResultType } from '@/types/eta';
 
 export function calculateEtaEngine(input: EtaInputType): EtaResultType {
   const hours = input.distance / input.speed;

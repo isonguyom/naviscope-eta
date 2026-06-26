@@ -1,20 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+
+import DashboardPageHeader from '@/components/layout/DashboardPageHeader';
+
 import EtaForm from '@/modules/eta/components/EtaForm';
 import EtaResults from '@/modules/eta/components/EtaResults';
 import VoyageSummary from '@/modules/eta/components/VoyageSummary';
-import { EtaInputType, EtaResultType } from '@/types/eta';
-import { calculateEtaEngine } from '@/lib/calculateETA';
-import DashboardPageHeader from '@/components/layout/DashboardPageHeader';
+import EmptyState from '@/components/ui/feedback/EmptyState';
+
+import { calculateEtaEngine } from '@/lib/calculations/calculateETA';
+
+import type { EtaInputType, EtaResultType } from '@/types/eta';
+import { Calculator, ShipWheel } from 'lucide-react';
 
 export default function EtaPage() {
-  const [result, setResult] = useState<EtaResultType | null>(null);
+  const [etaResult, setEtaResult] = useState<EtaResultType>();
 
-  const handleCalculate = (input: EtaInputType) => {
-    const result = calculateEtaEngine(input);
-    setResult(result);
-  };
+  const handleCalculate = useCallback((input: EtaInputType) => {
+    setEtaResult(calculateEtaEngine(input));
+  }, []);
 
   return (
     <div className="space-y-8">
@@ -27,9 +32,20 @@ export default function EtaPage() {
         <EtaForm onCalculate={handleCalculate} />
 
         <div className="space-y-6">
-          <EtaResults result={result} />
-
-          {result && <VoyageSummary result={result} />}
+          {etaResult ? (
+            <>
+              <EtaResults result={etaResult} />
+              <VoyageSummary result={etaResult} />
+            </>
+          ) : (
+            <EmptyState
+              icon={ShipWheel}
+              statusIcon={Calculator}
+              title="No ETA calculated yet"
+              description="Enter your voyage details and calculate an estimated arrival time. Voyage duration, estimated fuel consumption, and voyage summary will appear here."
+              status="Waiting for voyage information…"
+            />
+          )}
         </div>
       </div>
     </div>
