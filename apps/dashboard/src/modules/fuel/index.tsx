@@ -1,22 +1,38 @@
 'use client';
 
-import ComingSoonCard from '@/components/cards/ComingSoonCard';
-import DashboardPageHeader from '@/components/layout/DashboardPageHeader';
-import { Fuel } from 'lucide-react';
+import { useState } from 'react';
 
-export default function FuelPage() {
+import FuelEstimatorForm from '@/modules/fuel/components/FuelEstimatorForm';
+import FuelEstimatorResults from '@/modules/fuel/components/FuelEstimatorResults';
+
+import { estimateFuel } from '@/lib/calculations/estimateFuel';
+import { FuelEstimatorResultType } from '@/types/fuelEstimation';
+import { FuelEstimatorSchemaType } from '@/lib/validations/fuelEstimator';
+
+export default function FuelEstimator() {
+  const [result, setResult] = useState<FuelEstimatorResultType | null>(null);
+
+  const handleEstimate = (data: FuelEstimatorSchemaType) => {
+    const payload = {
+      vessel: data.vessel,
+      distance: Number(data.distance) || 0,
+      speed: Number(data.speed) || 0,
+      fuelConsumption: Number(data.fuelConsumption) || 0,
+      weatherFactor: data.weatherFactor,
+      safetyMargin: Number(data.safetyMargin) || 0,
+      fuelPrice: data.fuelPrice ? Number(data.fuelPrice) : undefined,
+    };
+
+    const estimation = estimateFuel(payload);
+
+    setResult(estimation);
+  };
+
   return (
-    <div className="space-y-8">
-      <DashboardPageHeader
-        title="Fuel Estimator"
-        description="Estimate voyage fuel consumption based on vessel type, distance, speed, and operational conditions."
-      />
+    <section className="grid gap-6 lg:grid-cols-2">
+      <FuelEstimatorForm onEstimate={handleEstimate} />
 
-      <ComingSoonCard
-        title="Fuel Optimization Engine"
-        description="Advanced fuel prediction using vessel type, speed curves, and voyage conditions."
-        icon={Fuel}
-      />
-    </div>
+      <FuelEstimatorResults result={result} />
+    </section>
   );
 }

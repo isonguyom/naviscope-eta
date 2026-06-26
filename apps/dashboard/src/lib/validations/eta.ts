@@ -1,10 +1,5 @@
 import { z } from 'zod';
-
-const numericString = z
-  .string()
-  .trim()
-  .min(1, 'This field is required')
-  .refine((value) => !Number.isNaN(Number(value)), 'Must be a valid number');
+import { numericString } from '@/lib/validations/helpers';
 
 export const etaFormSchema = z.object({
   vessel: z.string().min(1, 'Select a vessel'),
